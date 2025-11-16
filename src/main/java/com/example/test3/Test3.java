@@ -49,12 +49,12 @@ public class Test3 {
         DocumentParser parser = new ApacheTikaDocumentParser();
         EmbeddingModel embeddingModel = new AllMiniLmL6V2EmbeddingModel();
 
-        // 1er PDF : QCM Android / Kotlin / IA
+        // 1er PDF : support de RAG
         List<TextSegment> androidIaSegments = loadAndSplit(
                 Paths.get("src/main/resources/rag.pdf"), parser
         );
 
-        // 2ème PDF : contrôle blanc de maths
+        // 2ème PDF : QCM ANDROID
         List<TextSegment> mathsSegments = loadAndSplit(
                 Paths.get("src/main/resources/QCM_MAD-AI_COMPLET.pdf"), parser
         );
@@ -94,11 +94,11 @@ public class Test3 {
         Map<ContentRetriever, String> retrieverDescriptions = new LinkedHashMap<>();
         retrieverDescriptions.put(
                 androidIaRetriever,
-                "QCM sur la programmation Android en Kotlin avec des questions liées à l’IA."
+                "Support de cours sur le RAG"
         );
         retrieverDescriptions.put(
                 mathsRetriever,
-                "Sujet de contrôle blanc de mathématiques de première année."
+                "QCM sur la programmation Android en Kotlin avec des questions liées à l’IA."
         );
 
         var router = new LanguageModelQueryRouter(chatModel, retrieverDescriptions);
